@@ -1,7 +1,9 @@
 import Container from './Container'
-import Route from './Route'
+import CustomRoute from './CustomRoute'
+import RedirectMessage from './RedirectMessage'
 
 export {
     Container,
-    Route
+    CustomRoute,
+    RedirectMessage
 }
