@@ -1,23 +1,17 @@
 import React from 'react';
 import './App.css';
+import { Home, EnterEmail, EnterOtp, Profile, Register } from './pages'
+import { Route } from './components'
+import { authStatus } from './constants'
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Route page={<Home />} route='/' />
+      <Route page={<EnterEmail />} route='/enter-email' allowedStatus={[authStatus.GUEST]} />
+      <Route page={<EnterOtp />} route='/enter-otp' allowedStatus={[authStatus.OTP_SENT]} />
+      <Route page={<Profile />} route='/profile' allowedStatus={[authStatus.LOGGED_IN]} />
+      <Route page={<Register />} route='/register' allowedStatus={[authStatus.LOGGED_IN]} />
     </div>
   );
 }
