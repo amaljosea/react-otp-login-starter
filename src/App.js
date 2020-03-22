@@ -4,7 +4,7 @@ import { Home, EnterEmail, EnterOtp, Profile, Register } from './pages'
 import { CustomRoute } from './components'
 import { authStatus } from './constants'
 import { BrowserRouter, Switch } from 'react-router-dom'
-
+import api from './api'
 export const StoreContext = React.createContext();
 
 function App() {
@@ -16,15 +16,24 @@ function App() {
       emailId: ''
     }
   });
+
   useEffect(() => {
-    console.log("Load the app status here")
+    const token = localStorage.getItem('token')
+    const checkToken = async () => {
+      const response = await api.auth.checkToken({ token });
+      if (response.success) {
+        setStore({ ...store, authStatus: response.data.authStatus })
+      }
+    }
+    checkToken()
   }, [])
+
   console.log("store==>", store)
   return (
     <StoreContext.Provider value={{ store, setStore }}>
       <BrowserRouter>
         <Switch>
-          <CustomRoute component={EnterEmail} path='/enter-email' allowedStatus={authStatus.GUEST} />
+          <CustomRoute component={EnterEmail} path='/enter-email' />
           <CustomRoute component={EnterOtp} path='/enter-otp' allowedStatus={authStatus.OTP_SENT} />
           <CustomRoute component={Profile} path='/profile' allowedStatus={authStatus.LOGGED_IN} />
           <CustomRoute component={Register} path='/register' allowedStatus={authStatus.LOGGED_IN} />

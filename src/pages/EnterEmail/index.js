@@ -1,14 +1,24 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
+import api from '../../api'
+import { authStatus } from '../../constants'
 
 const EnterEmail = (props) => {
+    const formRef = useRef()
     const { store, setStore } = props
-    const handleSubmit = () => {
-        setStore({ ...store, email: "amal@dexlock.com" })
+    const [email, setEmail] = useState('')
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const response = await api.auth.checkEmail({ email });
+        if (response.success) {
+            localStorage.setItem('token', response.data.token);
+            setStore({ ...store, authStatus: authStatus.OTP_SENT })
+            props.history.push('/enter-otp')
+        }
     }
-    return <>
-        <input placeholder="john@gmail.com" />
-        <input placeholder="******" type="password" />
-        <button onClick={handleSubmit}>LOGIN</button>
-    </>
+    return <form onSubmit={handleSubmit} ref={formRef}>
+        <input id="email" name="email" placeholder="john@gmail.com" onChange={(e) => setEmail(e.target.value)} value={email} required type="email" />
+        <button type="submit">submit</button>
+    </form>
 }
 export default EnterEmail
