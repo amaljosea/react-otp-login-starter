@@ -33,7 +33,7 @@ function App() {
     <StoreContext.Provider value={{ store, setStore }}>
       <BrowserRouter>
         <Switch>
-          <CustomRoute component={EnterEmail} path='/enter-email' />
+          <CustomRoute component={EnterEmail} path='/enter-email/:referalCode?' />
           <CustomRoute component={EnterOtp} path='/enter-otp' allowedStatus={authStatus.OTP_SENT} />
           <CustomRoute component={Profile} path='/profile' allowedStatus={authStatus.LOGGED_IN} />
           <CustomRoute component={Register} path='/register' allowedStatus={authStatus.NOT_REGISETRED} />

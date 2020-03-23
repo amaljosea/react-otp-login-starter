@@ -7,7 +7,7 @@ const dummyApi = () => {
         data: {
             token: "123xyz",
             authStatus: authStatus.GUEST,
-            isRegisterd: true
+            isRegisterd: true //true - profile page, false - enter otp page
         }
     })
 }
