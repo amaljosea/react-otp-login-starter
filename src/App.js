@@ -36,7 +36,7 @@ function App() {
           <CustomRoute component={EnterEmail} path='/enter-email' />
           <CustomRoute component={EnterOtp} path='/enter-otp' allowedStatus={authStatus.OTP_SENT} />
           <CustomRoute component={Profile} path='/profile' allowedStatus={authStatus.LOGGED_IN} />
-          <CustomRoute component={Register} path='/register' allowedStatus={authStatus.LOGGED_IN} />
+          <CustomRoute component={Register} path='/register' allowedStatus={authStatus.NOT_REGISETRED} />
           <CustomRoute component={Home} path='/' />
         </Switch>
       </BrowserRouter>

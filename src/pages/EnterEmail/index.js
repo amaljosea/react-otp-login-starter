@@ -1,9 +1,8 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import api from '../../api'
 import { authStatus } from '../../constants'
 
 const EnterEmail = (props) => {
-    const formRef = useRef()
     const { store, setStore } = props
     const [email, setEmail] = useState('')
 
@@ -16,7 +15,7 @@ const EnterEmail = (props) => {
             props.history.push('/enter-otp')
         }
     }
-    return <form onSubmit={handleSubmit} ref={formRef}>
+    return <form onSubmit={handleSubmit}>
         <input id="email" name="email" placeholder="john@gmail.com" onChange={(e) => setEmail(e.target.value)} value={email} required type="email" />
         <button type="submit">submit</button>
     </form>

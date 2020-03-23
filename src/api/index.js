@@ -4,7 +4,8 @@ import dummyApi from './dummyApi'
 const api = {
     auth: {
         checkEmail: dummyApi,
-        checkToken: dummyApi
+        checkToken: dummyApi,
+        otpVerify: dummyApi
     }
 }
 
